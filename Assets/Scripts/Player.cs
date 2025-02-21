@@ -2,16 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Player : MonoBehaviour
 {
+    //Variables de movimiento
     public float moveSpeed = 10f;
     public float jumpForce = 50f;
+    
+    // Detección de suelo
+    public Transform groundCheck;
+    public float checkRadius = 0.2f;
+    public LayerMask groundLayer;
+    
+
     private Rigidbody2D rb;
     private Animator animator;
     private bool isGrounded;
+    private bool wasGrounded;
 
-
+    // Parámetros del Animator
+    private readonly string paramMovimiento = "Movimiento";
+    private readonly string paramSaltando = "Saltando";
+    private readonly string paramCayendo = "Cayendo";
 
     void Start()
     {
@@ -19,19 +30,24 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-
     void Update()
     {
+        // Almacena el estado anterior para detectar cambios
+        wasGrounded = isGrounded;
+        // Actualiza el estado del suelo usando Physics2D.OverlapCircle
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+        
         Move();
-        Jump(); 
-
+        Jump();
+        UpdateAnimations();
     }
 
     void Move()
     {
         float moveInput = Input.GetAxis("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-
+        animator.SetFloat(paramMovimiento, Mathf.Abs(moveInput));
+        
         // Mirar en la dirección del movimiento
         if (moveInput < 0)
         {
@@ -48,27 +64,44 @@ public class Player : MonoBehaviour
         if (isGrounded && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
         {
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            // Activar animación de salto inmediatamente
+            animator.SetBool(paramSaltando, true);
+            animator.SetBool(paramCayendo, false);
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    void UpdateAnimations()
     {
-        // Verifica si está en el suelo
-        if (collision.gameObject.CompareTag("Ground"))
+        // Si acaba de tocar el suelo, desactivar animaciones de salto/caída
+        if (isGrounded && !wasGrounded)
         {
-            isGrounded = true;
-
+            animator.SetBool(paramSaltando, false);
+            animator.SetBool(paramCayendo, false);
+        }
+        // Si está en el aire
+        else if (!isGrounded)
+        {
+            // Subiendo (velocidad vertical positiva) -> animación de salto
+            if (rb.linearVelocity.y > 0.1f)
+            {
+                animator.SetBool(paramSaltando, true);
+                animator.SetBool(paramCayendo, false);
+            }
+            // Cayendo (velocidad vertical negativa) -> animación de caída
+            else if (rb.linearVelocity.y < -0.1f)
+            {
+                animator.SetBool(paramSaltando, false);
+                animator.SetBool(paramCayendo, true);
+            }
         }
     }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // Sale del suelo
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
-
+    
+    // // Visualización del groundCheck en el editor
+    // void OnDrawGizmosSelected()
+    // {
+    //     if (groundCheck == null) return;
+        
+    //     Gizmos.color = Color.yellow;
+    //     Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+    // }
 }
-
