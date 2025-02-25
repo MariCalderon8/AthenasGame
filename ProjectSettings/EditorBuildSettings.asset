@@ -24,8 +24,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Capitulo4.unity
     guid: 26a84a405fb8cab4b83f17e7427d35dc
   - enabled: 1
-    path: Assets/Scenes/Capitulo Final.unity
-    guid: 77805c06a41f084448655c2255bd20bc
+    path: Assets/Scenes/CapituloFinal.unity
+    guid: ef57da135abf97c41a46bd66b0a70df1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
