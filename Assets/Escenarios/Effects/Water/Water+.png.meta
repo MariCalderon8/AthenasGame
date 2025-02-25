@@ -165,6 +165,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -709,7 +722,31 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Water+_0: -4321633308719413337
+      Water+_1: -5418171614589287619
+      Water+_10: -7762553736968550969
+      Water+_11: -883321396718147814
+      Water+_12: -6400525339076578459
+      Water+_13: 5994018099330754603
+      Water+_14: -7802613766269187914
+      Water+_15: -1373609519984214056
+      Water+_16: -5369722864351622185
+      Water+_17: 6532625556504746517
+      Water+_18: -7274204918975136280
+      Water+_19: 7421288777786526676
+      Water+_2: 167037294558086049
+      Water+_20: -1402029570593381912
+      Water+_21: -7053367543004868667
+      Water+_22: -6730278918127135350
+      Water+_23: -2468295768558725674
+      Water+_3: 2513813214299261534
+      Water+_4: -8561662247366449510
+      Water+_5: -3005027004087970231
+      Water+_6: -3466764912279380774
+      Water+_7: -9101694118964607239
+      Water+_8: -4325661521865457009
+      Water+_9: 3005880363743057000
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
