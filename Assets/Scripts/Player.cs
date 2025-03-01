@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     //Variables de movimiento
     public float moveSpeed = 10f;
     public float jumpForce = 50f;
+    private AudioSource audioSource;
+    public AudioClip jumpSound;
     
     // Detección de suelo
     public Transform groundCheck;
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -64,9 +67,9 @@ public class Player : MonoBehaviour
         if (isGrounded && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
         {
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            // Activar animación de salto inmediatamente
             animator.SetBool(paramSaltando, true);
             animator.SetBool(paramCayendo, false);
+            audioSource.PlayOneShot(jumpSound);
         }
     }
     
