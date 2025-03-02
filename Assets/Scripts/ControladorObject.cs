@@ -6,6 +6,9 @@ public class ControladorObject : MonoBehaviour
     public static ControladorObject Instance;
     public GameObject objetoMostrar; 
 
+    public AudioSource audioSource;
+    public AudioClip collectedSound;
+
     private void Awake(){
         if(ControladorObject.Instance == null){
             ControladorObject.Instance = this;
@@ -33,5 +36,6 @@ public class ControladorObject : MonoBehaviour
 
     public void collectObject(){
         objectsCollected++;  
+        audioSource.PlayOneShot(collectedSound);
     }
 }

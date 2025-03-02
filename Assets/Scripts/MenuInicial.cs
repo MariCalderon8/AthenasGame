@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuInicial : MonoBehaviour
 {
+
     public void iniciar()
     {
         SceneManager.LoadScene("Capitulo1");

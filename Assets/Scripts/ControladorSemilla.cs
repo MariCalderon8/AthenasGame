@@ -8,6 +8,9 @@ public class ControladorSemilla : MonoBehaviour
     public static ControladorSemilla Instance;
     public GameObject objetoMostrar; 
 
+    public AudioSource audioSource;
+    public AudioClip collectedSound;
+
     private void Awake(){
         if(ControladorSemilla.Instance == null){
             ControladorSemilla.Instance = this;
@@ -36,6 +39,7 @@ public class ControladorSemilla : MonoBehaviour
 
     public void collectSeed(){
         seedCollected = true;
+        audioSource.PlayOneShot(collectedSound);
         objetoMostrar.SetActive(true);
     }
 
